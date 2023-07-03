@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Fecha de Registro</th>
+            <th>Estatus</th>
+        </tr>
+        {% for producto in productos %}
+        <tr>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.descripcion }}</td>
+            <td>{{ producto.precio }}</td>
+            <td>{{ producto.fecha_registro }}</td>
+            <td>{{ producto.estatus }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No hay productos</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <h2>Ingresar nuevo producto</h2>
+    <form method="POST" action="{% url 'productos' %}">
+        {% csrf_token %}
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" required><br>
+        <label for="descripcion">Descripción:</label>
+        <textarea name="descripcion" id="descripcion" required></textarea><br>
+        <label for="precio">Precio:</label>
+        <input type="number" name="precio" id="precio" required><br>
+        <input type="submit" value="Guardar">
+    </form>
+</body>
+</html>
